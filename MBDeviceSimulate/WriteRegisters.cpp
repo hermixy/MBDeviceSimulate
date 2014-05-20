@@ -4,15 +4,15 @@
 
 WriteRegisters::WriteRegisters()
 {
-	temp_heater_1 = temp_heater_2 = amperage_heater_1 = amperage_heater_2 = amperage_heater_3 = voltage_heater_1 = voltage_heater_2 =
+	temp_heater_2 = temp_heater_3 = amperage_heater_1 = amperage_heater_2 = amperage_heater_3 = voltage_heater_1 = voltage_heater_2 =
 		voltage_heater_3 = residual_pressure = inert_gas_pressure = rate_rod = rate_crucible = rate_rotational_rod =
 		rate_rotational_crucible = shift_rod = shift_crucible = weight = 0.f;
 }
 
 void WriteRegisters::getAll(uint16_t *dest)
 {
-	copy_state(temp_heater_1, dest, 0, 1);
-	copy_state(temp_heater_2, dest, 2, 3);
+	copy_state(temp_heater_2, dest, 0, 1);
+	copy_state(temp_heater_3, dest, 2, 3);
 	copy_state(amperage_heater_1, dest, 4, 5);
 	copy_state(amperage_heater_2, dest, 6, 7);
 	copy_state(amperage_heater_3, dest, 8, 9);
@@ -30,9 +30,9 @@ void WriteRegisters::getAll(uint16_t *dest)
 	copy_state(weight, dest, 32, 33);
 }
 
-void WriteRegisters::set_temp_heater_1(float temp_heater_1)
+void WriteRegisters::set_temp_heater_3(float temp_heater_3)
 {
-	this->temp_heater_1 = temp_heater_1;
+	this->temp_heater_3 = temp_heater_3;
 }
 
 void WriteRegisters::set_temp_heater_2(float temp_heater_2)

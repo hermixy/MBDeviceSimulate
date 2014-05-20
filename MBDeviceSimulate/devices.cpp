@@ -11,12 +11,16 @@ void DeviceHeaterMain::process()
 		on();
 		simulate_status();
 
-		int u = U_HEATER_1_1 + (rand() % (int)(U_HEATER_1_2 - U_HEATER_1_1 + 1));
+		float u = (float) (U_HEATER_1_1 + (rand() % (int)(U_HEATER_1_2 - U_HEATER_1_1 + 1)));
+		float temp = (rr->get_temp_heater_1() > MAX_TEMP_HEATER_1) ? MAX_TEMP_HEATER_1 : rr->get_temp_heater_1();
+		float proc_tmp = temp * 100 / MAX_TEMP_HEATER_1;
+		proc_tmp = 100 - proc_tmp;
+		u = u - (TEMP_2_U_DELTA_HEATER_1 * proc_tmp);
+
 		float i = (float) (P_HEATER_1 / u);
 
-		wr->set_temp_heater_1(rr->get_temp_heater_1());
 		wr->set_amperage_heater_1(i);
-		wr->set_voltage_heater_1((float) u);
+		wr->set_voltage_heater_1(u);
 
 	}
 		
@@ -26,7 +30,6 @@ void DeviceHeaterMain::off()
 {
 	Device::off();
 	ar->set_power_heater_1(0);
-	wr->set_temp_heater_1(0.f);
 	wr->set_amperage_heater_1(0.f);
 	wr->set_voltage_heater_1(0.f);
 }
@@ -53,12 +56,17 @@ void DeviceHeaterGround::process()
 		on();
 		simulate_status();
 
-		int u = U_HEATER_2_1 + (rand() % (int)(U_HEATER_2_2 - U_HEATER_2_1 + 1));
+		float u = (float)(U_HEATER_2_1 + (rand() % (int)(U_HEATER_2_2 - U_HEATER_2_1 + 1)));
+		float temp = (rr->get_temp_heater_2() > MAX_TEMP_HEATER_2) ? MAX_TEMP_HEATER_2 : rr->get_temp_heater_2();
+		float proc_tmp = temp * 100 / MAX_TEMP_HEATER_2;
+		proc_tmp = 100 - proc_tmp;
+		u = u - (TEMP_2_U_DELTA_HEATER_2 * proc_tmp);
+
 		float i = (float)(P_HEATER_2 / u);
 
-		wr->set_temp_heater_2(rr->get_temp_heater_2());
+		wr->set_temp_heater_2(temp);
 		wr->set_amperage_heater_2(i);
-		wr->set_voltage_heater_2((float)u);
+		wr->set_voltage_heater_2(u);
 
 	}
 
@@ -95,11 +103,18 @@ void DeviceHeaterBackGround::process()
 		on();
 		simulate_status();
 
-		int u = U_HEATER_3_1 + (rand() % (int)(U_HEATER_3_2 - U_HEATER_3_1 + 1));
+		float u = (float)(U_HEATER_3_1 + (rand() % (int)(U_HEATER_3_2 - U_HEATER_3_1 + 1)));
+		float temp = (rr->get_temp_heater_3() > MAX_TEMP_HEATER_3) ? MAX_TEMP_HEATER_3 : rr->get_temp_heater_3();
+		float proc_tmp = temp * 100 / MAX_TEMP_HEATER_3;
+		proc_tmp = 100 - proc_tmp;
+		u = u - (TEMP_2_U_DELTA_HEATER_3 * proc_tmp);
+
 		float i = (float)(P_HEATER_3 / u);
 
+
+		wr->set_temp_heater_3(temp);
 		wr->set_amperage_heater_3(i);
-		wr->set_voltage_heater_3((float)u);
+		wr->set_voltage_heater_3(u);
 
 	}
 
@@ -109,6 +124,7 @@ void DeviceHeaterBackGround::off()
 {
 	Device::off();
 	ar->set_power_heater_3(0);
+	wr->set_temp_heater_3(0.f);
 	wr->set_amperage_heater_3(0.f);
 	wr->set_voltage_heater_3(0.f);
 }

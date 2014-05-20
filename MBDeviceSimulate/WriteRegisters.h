@@ -7,8 +7,8 @@ class WriteRegisters
 public:
 	WriteRegisters();
 	void getAll(uint16_t *dest);
-	void set_temp_heater_1(float temp_heater_1);
 	void set_temp_heater_2(float temp_heater_2);
+	void set_temp_heater_3(float temp_heater_3);
 	void set_amperage_heater_1(float amperage_heater_1);
 	void set_amperage_heater_2(float amperage_heater_2);
 	void set_amperage_heater_3(float amperage_heater_3);
@@ -28,8 +28,8 @@ public:
 private:
 	void copy_state(float state, uint16_t *dest, int index_1, int index_2);
 
-	float temp_heater_1;
 	float temp_heater_2;
+	float temp_heater_3;
 	float amperage_heater_1;
 	float amperage_heater_2;
 	float amperage_heater_3;
