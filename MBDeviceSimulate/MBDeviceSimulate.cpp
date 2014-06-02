@@ -20,7 +20,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	Controller controller;
 
 	int status = controller.initialize();
-	printf("init = %d\n", controller.initialize());
+	printf("init = %d\n", status);
 
 
 	if (status == 0) {
