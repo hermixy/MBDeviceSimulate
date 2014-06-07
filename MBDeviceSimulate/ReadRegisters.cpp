@@ -26,7 +26,7 @@ float ReadRegisters::get_float(uint16_t *src, int index_1, int index_2)
 {
 	uint16_t node[2];
 	node[0] = src[index_1];
-	node[2] = src[index_2];
+	node[1] = src[index_2];
 	return modbus_get_float(node);
 }
 
