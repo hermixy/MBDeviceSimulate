@@ -22,13 +22,12 @@ int _tmain(int argc, _TCHAR* argv[])
 	int status = controller.initialize();
 	printf("init = %d\n", status);
 
-
 	if (status == 0) {
 		signal(SIGINT, signal_callback_handler);
 		while (1) {
-			printf("invoke\n");
 			controller.simulate();
-			Sleep(5000);
+			printf("----\n");
+			Sleep(10000);
 		}
 	}
 

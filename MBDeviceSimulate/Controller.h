@@ -20,5 +20,5 @@ private:
 	WriteRegisters *wr;
 	AlarmRegisters *ar;
 	CommandRegisters *cr;
-	int status_init;
+	struct TCPData data;
 };

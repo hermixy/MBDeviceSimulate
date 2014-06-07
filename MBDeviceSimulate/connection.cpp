@@ -9,7 +9,23 @@ ConnectionModbusPoint::ConnectionModbusPoint(modbus_t *ctx)
 
 int ConnectionModbusPoint::openConnection()
 {
-	return modbus_connect(ctx);
+	if (ctx != NULL)
+		return modbus_connect(ctx);
+	return -1;
+}
+
+int ConnectionModbusPoint::openConnection(modbus_t *ctx)
+{
+	this->ctx = ctx;
+	return this->openConnection();
+}
+
+void ConnectionModbusPoint::closeConnection() 
+{
+	if (ctx != NULL) {
+		modbus_close(ctx);
+		modbus_free(ctx);
+	}
 }
 
 int ConnectionModbusPoint::readRegisters(int address, int cnt, uint16_t *dest)
@@ -24,8 +40,7 @@ int ConnectionModbusPoint::writeRegisters(int address, int cnt, uint16_t *src)
 
 ConnectionModbusPoint::~ConnectionModbusPoint()
 {
-	modbus_close(ctx);
-	modbus_free(ctx);
+	closeConnection();
 }
 
 modbus_t * ConnectionModbusPoint::createPoint(TypeConnection type, void *data)

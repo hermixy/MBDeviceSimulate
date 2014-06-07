@@ -19,6 +19,8 @@ void DeviceHeaterMain::process()
 
 		float i = (float) (P_HEATER_1 / u);
 
+		printf("heater_1 i = %g; u = %g\n", i, u);
+
 		wr->set_amperage_heater_1(i);
 		wr->set_voltage_heater_1(u);
 
@@ -63,6 +65,8 @@ void DeviceHeaterGround::process()
 		u = u - (TEMP_2_U_DELTA_HEATER_2 * proc_tmp);
 
 		float i = (float)(P_HEATER_2 / u);
+
+		printf("heater_2 i = %g; u = %g; t = %g\n", i, u, temp);
 
 		wr->set_temp_heater_2(temp);
 		wr->set_amperage_heater_2(i);
@@ -111,6 +115,7 @@ void DeviceHeaterBackGround::process()
 
 		float i = (float)(P_HEATER_3 / u);
 
+		printf("heater_3 i = %g; u = %g; t = %g\n", i, u, temp);
 
 		wr->set_temp_heater_3(temp);
 		wr->set_amperage_heater_3(i);
